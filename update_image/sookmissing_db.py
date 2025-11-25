@@ -1,9 +1,12 @@
 import requests
 import pymysql
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+try :
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 # API 정보
 api_url = "https://api.odcloud.kr/api/15143094/v1/uddi:083f29fd-a18a-4c23-81e5-8aa5101c4ac6"
@@ -11,10 +14,10 @@ api_key = os.getenv("API_KEY")
 
 # DB 연결 정보
 DB_CONFIG = {
-    'host': '127.0.0.1', 
+    'host': os.getenv('DB_HOST', '127.0.0.1'), 
     'port': 3306,
     'user': 'root',
-    'password': os.getenv("DB_PASSWORD"),
+    'password': os.getenv("DB_PASSWORD", "1234"),
     'db': 'sookmissing_db',
     'charset': 'utf8mb4'
 }
