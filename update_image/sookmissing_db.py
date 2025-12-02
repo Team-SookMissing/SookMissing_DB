@@ -47,14 +47,16 @@ def main():
         total_inserted = 0
 
         while True:
+            headers = {
+                'Authorization': f"Infuser {api_key}"
+            }
             params = {
-                'serviceKey': api_key,
                 'page': page,
                 'perPage': per_page,
                 'returnType': 'JSON'
             }
 
-            response = requests.get(api_url, params=params)
+            response = requests.get(api_url, headers=headers, params=params)
             if response.status_code != 200:
                 print(f"Error {response.status_code}")
                 print(response.text)
